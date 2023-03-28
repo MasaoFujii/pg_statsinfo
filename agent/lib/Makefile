@@ -15,7 +15,13 @@ DATA_built = pg_statsinfo.sql
 DATA = uninstall_pg_statsinfo.sql
 MODULE_big = pg_statsinfo
 
+ifeq ($(shell uname),Linux)
 SHLIB_LINK = -Wl,--version-script=library.map
+else
+library_mac.map:
+	grep -E ^"    " library.map | sed s/";"//g | sed s/"    "/"_"/g > library_mac.map
+	SHLIB_LINK = -Wl,-exported_symbols_list library_mac.map
+endif
 
 ifndef USE_PGXS
 top_builddir = ../../../..

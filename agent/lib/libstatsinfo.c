@@ -10,7 +10,9 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#if !defined(__darwin__)
 #include <sys/sysmacros.h>
+#endif
 #include <sys/wait.h>
 #include <time.h>
 #include <float.h>
@@ -1999,9 +2001,11 @@ done:
 #define NUM_CPUSTATS_COLS		9
 #define NUM_STAT_FIELDS_MIN		6
 
+#if !defined(__darwin__)
 /* not support a kernel that does not have the required fields at "/proc/stat" */
 #if !LINUX_VERSION_AT_LEAST(2,5,41)
 #error kernel version 2.5.41 or later is required
+#endif
 #endif
 
 /*

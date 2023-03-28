@@ -12,6 +12,7 @@
 
 #include "catalog/pg_control.h"
 
+#if !defined(__darwin__)
 #ifndef WIN32
 #include "linux/version.h"
 #endif
@@ -25,6 +26,7 @@
 #ifndef HAVE_SYNC_FILE_RANGE
 #if (LINUX_VERSION_AT_LEAST(2,6,17) && GLIBC_VERSION_AT_LEAST(2,6))
 #define HAVE_SYNC_FILE_RANGE
+#endif
 #endif
 #endif
 

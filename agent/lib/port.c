@@ -8,7 +8,12 @@
 
 #ifndef WIN32
 
+#if defined(__darwin__)
+#include <sys/mount.h>
+#include <sys/param.h>
+#else
 #include <sys/statfs.h>
+#endif
 #include <unistd.h>
 
 bool

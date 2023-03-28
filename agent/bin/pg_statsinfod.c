@@ -946,7 +946,7 @@ getlocaltimestamp(void)
 			ts->tm_hour,
 			ts->tm_min,
 			ts->tm_sec,
-			tv.tv_usec);
+			(long) tv.tv_usec);
 #else
 	GetLocalTime(&stTime);
 
